@@ -4,7 +4,7 @@ Tags: button generator, button creator, button maker, css button, css3 button, c
 Requires at least: 3.9
 Donate Link: https://mangobuttons.com/pricing
 Tested up to: 4.1.1
-Stable tag: 1.0.4
+Stable tag: 1.1.0
 License: GPLv2
 
 Mango Buttons is a button creator for WordPress that allows anyone to create beautiful buttons anywhere on their site.
@@ -13,7 +13,9 @@ Mango Buttons is a button creator for WordPress that allows anyone to create bea
 
 Mango Buttons is a powerful button creation plugin that allows anyone to create great-looking CSS3 buttons that can be used anywhere on your site (no coding required!).
 
-Mango Buttons are completely responsive and designed to look great on mobile, tablet, and desktop devices. Choose from a handful of beautiful button presets to get started, and easily customize the color and size of your button to 
+Mango Buttons are completely responsive and designed to look great on mobile, tablet, and desktop devices. Choose from a handful of beautiful button presets to get started, and easily customize the color and size of your button to optimize the way you capture visitor attention.
+
+https://www.youtube.com/watch?v=Ao06fzidhiE
 
 
 = Highlights =
@@ -72,6 +74,14 @@ By default, no information is sent to mangobuttons.com. You can opt in to receiv
 9. Fine-Tune button colors to either match your brand or stand in on your pages & posts
 
 == Changelog ==
+
+= 1.1.0 | Apr 16, 2015 =
+* Feature: The Mango Buttons icon in the visual editor can now be switched to a Grayscale icon
+* Feature: You can now subscribe for Mango Buttons email updates & get a 10% OFF discount on the settings page
+* Feature: Added welcome message for first-time installs directing users to the settings page / getting started videos
+* Tweak: Added Getting Started w/ Visual Editor video to the ReadMe
+* Tweak: Removed deprecated setup page functionality
+* Fix: "Destroying" plugin data should now successfully remove existing plugin data & uninstall the plugin
 
 = 1.0.4 | Apr 6, 2015 =
 * Tweak: Relaunched plugin with new name, updated styling, videos, etc.
