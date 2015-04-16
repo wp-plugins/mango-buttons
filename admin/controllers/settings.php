@@ -37,6 +37,7 @@ class mb_settings{
 		
 		update_option('mb_email', $settings['email']);
 		update_option('mb_subscribed', $settings['subscribed']);
+		update_option('mb_icon_color', $settings['icon_color']);
 		
 		$result = true;
 		
@@ -52,7 +53,7 @@ class mb_settings{
 	static function destroy_plugin_data(){
 		mb()->deactivateAndDestroyMBData();
 		
-		return;
+		return true;
 	}
 	
 	//echo out the settings view (html file) file when loading the bars admin page
@@ -70,9 +71,10 @@ class mb_settings{
 		wp_localize_script('mb-settings', 'MB_GLOBALS', array( 'MB_ADMIN_NONCE' => wp_create_nonce('mb_admin_nonce') ));
 		
 		wp_localize_script('mb-settings', 'mb_settings', array(
-			'email' => get_option('mb_email'),
-			'subscribed' => get_option('mb_subscribed'),
+			'email' => wp_get_current_user()->user_email,
 			'fname' => wp_get_current_user()->user_firstname,
+			'subscribed' => get_option('mb_subscribed'),
+			'icon_color' => get_option('mb_icon_color'),
 			'website' => get_site_url()
 		) );
 		

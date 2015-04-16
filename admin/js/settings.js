@@ -10,21 +10,23 @@ jQuery(document).ready(function($){
 		
 		self.settings = {
 			email: ko.observable(),
-			subscribed: ko.observable()
+			subscribed: ko.observable(),
+			icon_color: ko.observable()
 		}
 		self.settings.cache = {
-			email: ko.observable()
+			email: ko.observable(),
+			icon_color: ko.observable()
 		}
 		
 		self.settings.cacheCurrentSettings = function(){
 			
 			self.settings.cache.email(self.settings.email());
-			
+			self.settings.cache.icon_color(self.settings.icon_color());
 		}
 		
 		self.settings.dirty = ko.computed(function(){
 			
-			if(self.settings.email() != self.settings.cache.email()){
+			if(self.settings.icon_color() != self.settings.cache.icon_color()){
 				return true;
 			}
 			else{
@@ -88,12 +90,12 @@ jQuery(document).ready(function($){
 					mb_admin_nonce: MB_GLOBALS.MB_ADMIN_NONCE,
 					settings: {
 						email: self.settings.email(),
+						icon_color: self.settings.icon_color(),
 						subscribed: self.settings.subscribed()
 					}
 				},
 				success: function(response){
-					
-					self.pushNotification('Settings updated', 'success');
+
 					self.settings.cacheCurrentSettings();
 					
 					self.savingSettings(false);
@@ -119,7 +121,7 @@ jQuery(document).ready(function($){
 			//POST subscirbe form to mailchimp servers and handle response by updating page
 			$.ajax({
 				type: "POST",
-				url: "//philbaylog.us6.list-manage.com/subscribe/post-json?u=e551001469dd03b8e20452a24&id=baf6f8375b&c=?",
+				url: "//philbaylog.us6.list-manage.com/subscribe/post-json?u=e551001469dd03b8e20452a24&id=6071c4038b&c=?",
 				data: {
 					EMAIL: $email_address,
 					FNAME: mb_settings.fname,
@@ -133,7 +135,9 @@ jQuery(document).ready(function($){
 						self.settings.subscribed(true);
 						
 						self.saveSettings(function(){
-							$('#subscribe-success-text').show();
+							$('.mb-subscribe').css('textAlign', 'center');
+							$('.mb-subscribe form').hide();
+							$('.mb-subscribe-text').text('Thanks for subscribing! Confirm your email to recieve your discount code.');
 							self.subscribing(false);
 						});
 						
@@ -153,13 +157,21 @@ jQuery(document).ready(function($){
 			//get settings straight from php localization
 			
 			self.settings.email(mb_settings.email);
-			self.settings.subscribed(mb_settings.subscribed);
+			self.settings.icon_color(mb_settings.icon_color);
+			self.settings.subscribed(mb_settings.subscribed && mb_settings.subscribed !== "false");
 			
 			
 			self.settings.cacheCurrentSettings();
 			
 			self.syncingDataWithServer(false);
 			
+			
+			if(!self.settings.subscribed()){
+				setTimeout(function(){
+					$('.mb-subscribe').slideDown(500);
+					$('#mb-settings').css('paddingTop', 1);//not sure why but this fixes the drop down "jumping" the header
+				}, 350);
+			}
 		}
 		
 		self.init = function(){

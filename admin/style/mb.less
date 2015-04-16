@@ -6,6 +6,7 @@
 @import 'components/mb-form-box.less';
 @import 'components/mb-options-list.less';
 @import 'components/mb-setup-steps.less';
+@import 'components/mb-subscribe.less';
 
 @import 'components/mb-modal.less';
 
@@ -89,6 +90,23 @@
 			}
 		}
 	}
+	
+	.tiny-mce-color-small,.tiny-mce-grayscale-small{
+		width:16px;
+		height:16px;
+		background-size:cover;
+		border:none;
+		margin-bottom:-4px;
+		
+		.rounded-corners(5px);
+		overflow:hidden;
+	}
+	.tiny-mce-color-small{
+		background-image:url('../images/TinyMCEButton-color.png');
+	}
+	.tiny-mce-grayscale-small{
+		background-image:url('../images/TinyMCEButton-grayscale.png');
+	}
 
 	.actionable{
 		cursor:pointer;
@@ -158,7 +176,7 @@
 			}
 			
 			&.ad1{
-				background-image:url('../images/ads/sidebar-ad.png');
+				background-image:url('../images/ads/sidebar-ad-2.png');
 			}
 		}
 	}

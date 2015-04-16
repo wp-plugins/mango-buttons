@@ -1,4 +1,15 @@
 <div id="mb-settings" class="mb-page">
+	
+	<div class="mb-subscribe" style="display:none;">
+		<div class="wrap">
+			<div class="mb-subscribe-text">Subscribe to email updates and get 10% OFF Mango Buttons PRO.</div>
+			<form data-bind="submit: subscribe">
+				<input type="text" placeholder="Email" spellcheck="false" data-bind="value: settings.email, valueUpdate: 'keyup'" />
+				<input type="submit" value="SUBSCRIBE" data-bind="enable: !subscribing(), value: subscribing() ? 'Subscribing...' : 'SUBSCRIBE'" />
+			</form>
+		</div>
+	</div>
+	
 	<div class="wrap">
 		
 		<div class="mb-header">
@@ -15,24 +26,31 @@
 			</div>
 			
 			<!--<h4>Well this is embarrassing...this plugin doesn't have any settings yet!</h4>-->
-			<p>Have any ideas for things you would like to be able to customize? <a href="https://mangobuttons.com/support" target="_blank">Let me know here!</a></p>
+			<!--<p>Have any ideas for things you would like to be able to customize? <a href="https://mangobuttons.com/support" target="_blank">Let me know here!</a></p>-->
 			
 			<div style="display:none;" class="mb-options-list" data-bind="visible: !syncingDataWithServer(), with: settings">
 				
-				<!--<div class="option-element">
-					<h6>Email Address (Optional)</h6>
-					<p>Where should we plugin updates & news?</p>
-					<input type="text" data-bind="valueUpdate: 'keyup', value: email" />
+				<div class="option-element">
+					<h6>Editor Icon</h6>
+					<p>Do you want the mango-colored icon ("color") or grayscale? <small>( <img class="tiny-mce-color-small" />&nbsp; OR &nbsp;<img class="tiny-mce-grayscale-small" /> )</small></p>
 					
-					<button style="display:none;" data-bind="click: $root.subscribe, visible: !subscribed() && !$root.subscribing()" class="tiny green">RECEIVE UPDATES & NEWS</button>
+					<ul>
+						<li data-bind="click: function(){ icon_color('color'); }, css: { selected: icon_color() == 'color' }">COLOR</li>
+						<li data-bind="click: function(){ icon_color('grayscale'); }, css: { selected: icon_color() == 'grayscale' }">GRAYSCALE</li>
+					</ul>
 					
-					<span id="subscribe-success-text" style="display:none;font-size:14px;" class="green-color">&nbsp;<i class="fa fa-check-circle-o"></i> &nbsp;You're in! Check your email to confirm.</span>
-					<span style="display:none;font-size:14px;" data-bind="visible: $root.subscribing()">&nbsp;<i class="fa fa-spin fa-spinner"></i> &nbsp;Subscribing...</span>
-				</div>-->
+				</div>
 				
 			</div><!--/.mb-options-list-->
 			
-			<h4 style="clear:both;position:relative;float:left;margin:50px 0 0 0;">Quick How-To & Intro Videos</h4>
+			<!--<a href="//fast.wistia.net/embed/iframe/bj9wbt88v4?popover=true" class="wistia-popover[height=341,playerColor=7b796a,width=640]"><i class="fa fa-youtube-play"></i> &nbsp;Visual Editor Introduction</a>-->
+			
+			<button style="display:none;" id="save-settings-button" class="purple extra-padding" data-bind="visible: !syncingDataWithServer(), click: saveSettings, enable: settings.dirty(), css: { disabled: !settings.dirty() || savingSettings() }">
+				<span data-bind="visible: !savingSettings()">Save Settings</span>
+				<span data-bind="visible: savingSettings()"><i class="fa fa-spin fa-spinner"></i> &nbsp;Saving...</span>
+			</button>
+			
+			<h4 style="clear:both;position:relative;float:left;margin:25px 0 0 0;padding-top:25px;width:100%;border-top:1px solid #DDD;">Quick How-To & Intro Videos</h4>
 			<ul id="intro-videos">
 				<li>
 					<h6>Visual Editor</h6>
@@ -46,13 +64,6 @@
 			<!--JS for wistia popover embeds-->
 			<script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/popover-v1.js"></script>
 			
-			<!--<a href="//fast.wistia.net/embed/iframe/bj9wbt88v4?popover=true" class="wistia-popover[height=341,playerColor=7b796a,width=640]"><i class="fa fa-youtube-play"></i> &nbsp;Visual Editor Introduction</a>-->
-			
-			<!--<button style="display:none;" id="save-settings-button" class="purple extra-padding" data-bind="visible: !syncingDataWithServer(), click: saveSettings, enable: settings.dirty(), css: { disabled: !settings.dirty() || savingSettings() }">
-				<span data-bind="visible: !savingSettings()">Save Settings</span>
-				<span data-bind="visible: savingSettings()"><i class="fa fa-spin fa-spinner"></i> &nbsp;Saving...</span>
-			</button>-->
-			
 			<div style="float:left;margin-top:150px;position:relative;width:100%;" class="option-element" data-bind="with: $root">
 				<span style="display:none;cursor:pointer;font-size:12px;border-bottom:1px dotted #AAA;color:#AAA;" data-bind="visible: !deletingPlugin(), click: function(){ deletingPlugin(true); }">Delete all plugin settings & data</span>
 				<div style="display:none;" class="dark-color" style="font-size:16px;padding:20px;position:relative;float:left;border-radius:3px;background:#EEE;border:1px solid #DDD;" data-bind="visible: deletingPlugin()">
@@ -62,6 +73,7 @@
 					<button style="position:relative;float:left;clear:none;margin-top:15px;margin-left:20px;" data-bind="visible: deletingPlugin(), click: function(){ deletingPlugin(false); }" class="grey tiny">CANCEL</button>
 					</div>
 			</div>
+			
 			
 			
 		</div><!--/.mb-main-content-->

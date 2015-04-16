@@ -806,6 +806,82 @@
 .mb-setup-steps li.divider {
   opacity: .15;
 }
+.mb-subscribe {
+  overflow: hidden;
+  position: relative;
+  float: left;
+  clear: both;
+  width: 100%;
+  background: #f04e29;
+  left: -20px;
+  padding-right: 20px;
+  padding-left: 20px;
+  height: 50px;
+  line-height: 50px;
+  margin: 0;
+  top: -1px;
+  text-align: left;
+  font-size: 14px;
+  color: #FFF;
+}
+.mb-subscribe .wrap {
+  margin: 0;
+}
+.mb-subscribe form {
+  position: absolute;
+  right: 40px;
+  top: 0px;
+}
+.mb-subscribe form input[type="text"] {
+  font-size: 12px;
+  color: #FFF;
+  width: 180px;
+  height: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.15);
+  outline: none;
+}
+.mb-subscribe form input[type="text"]:focus {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  /* For IE 8 */
+}
+.mb-subscribe form input[type="text"]::-webkit-input-placeholder {
+  /* WebKit browsers */
+  color: rgba(255, 225, 225, 0.5) !important;
+}
+.mb-subscribe form input[type="text"]:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: rgba(255, 225, 225, 0.5) !important;
+}
+.mb-subscribe form input[type="text"]::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: rgba(255, 225, 225, 0.5) !important;
+}
+.mb-subscribe form input[type="text"]:-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+  color: rgba(255, 225, 225, 0.5) !important;
+}
+.mb-subscribe form input[type="submit"] {
+  width: auto;
+  line-height: 29px;
+  height: 35px;
+  padding: 0 15px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background: #ffffff;
+  color: #f04e29;
+  font-size: 13px;
+}
+.mb-subscribe form input[type="submit"]:hover {
+  background: #f0f0f0;
+}
 #mb-modal {
   z-index: 100101;
   /*because mce-modal-block is 100100*/
@@ -1332,6 +1408,13 @@
   clear: none;
   width: 25%;
   margin-top: 15px;
+  opacity: .65;
+  -webkit-transition: all linear 0.2s;
+  -moz-transition: all linear 0.2s;
+  transition: all linear 0.2s;
+}
+#mb-settings #intro-videos li:hover {
+  opacity: 1;
 }
 #mb-settings #intro-videos li h6 {
   margin: 10px 0;
@@ -1413,6 +1496,24 @@
   cursor: pointer;
   opacity: 1;
 }
+.mb-page .tiny-mce-color-small,
+.mb-page .tiny-mce-grayscale-small {
+  width: 16px;
+  height: 16px;
+  background-size: cover;
+  border: none;
+  margin-bottom: -4px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.mb-page .tiny-mce-color-small {
+  background-image: url('../images/TinyMCEButton-color.png');
+}
+.mb-page .tiny-mce-grayscale-small {
+  background-image: url('../images/TinyMCEButton-grayscale.png');
+}
 .mb-page .actionable {
   cursor: pointer;
 }
@@ -1485,5 +1586,5 @@
   -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='" rgba(53, 45, 61, 0.25) "')";
 }
 .mb-page .mb-sidebar-content .mb-sidebar-ad.ad1 {
-  background-image: url('../images/ads/sidebar-ad.png');
+  background-image: url('../images/ads/sidebar-ad-2.png');
 }

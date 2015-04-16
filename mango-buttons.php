@@ -3,7 +3,7 @@
 Plugin Name: Mango Buttons
 Plugin URI: https://mangobuttons.com
 Description: Mango Buttons is a button creator for WordPress that allows anyone to create beautiful buttons anywhere on their site.
-Version: 1.0.4
+Version: 1.1.0
 Author: Phil Baylog
 Author URI: https://mangobuttons.com
 License: GPLv2
@@ -16,7 +16,7 @@ define( 'MB_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'MB_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 global $MB_VERSION;
-$MB_VERSION = '1.0.4';
+$MB_VERSION = '1.1.0';
 
 class MangoButtons{
 
@@ -84,11 +84,44 @@ class MangoButtons{
 	function render_mb_modal(){
 		readfile(MB_PLUGIN_PATH . 'admin/views/mb-modal.html');
 	}
+	
+	function get_mb_icon_color(){
+		if(get_option('mb_icon_color')){
+			return get_option('mb_icon_color');
+		}
+		else{
+			return 'color';
+		}
+	}
+	
+	function create_global_mb_js_variables(){
+		
+		if(is_admin()){
+			?>
+				<script type="text/javascript">
+					var MB_JS_GLOBALS = {};
+					MB_JS_GLOBALS.ICON_COLOR = '<?php echo mb()->get_mb_icon_color(); ?>';
+				</script>
+			<?php
+		}
+		
+	}
 
 	//called after the 'plugins_loaded action is fired
 	function include_after_plugin_loaded(){
 		
 		global $MB_VERSION;
+		
+		//If user is activating the plugin for the first time
+		if(!get_option('MB_VERSION')){
+			$html = '';
+			
+			$html .= '<div class="updated" style="border-color:#F6871F;padding:5px;">';
+			 $html .= '<p style="margin-left:10px;">Thanks for installing Mango Buttons! &nbsp;&nbsp;&nbsp;<a class="mb-bg" href="options-general.php?page=mb-admin" style="position:relative;background:#F6871F;color:#FFF;padding:3px 6px;cursor:pointer;border-radius:3px;letter-spacing:.05em;font-size:12px;font-weight:bold;">GET STARTED WITH MANGO BUTTONS &nbsp;<i class="fa fa-long-arrow-right"></i></a></p>';
+			$html .= '</div><!--/.updated-->';
+			
+			echo $html;
+		}
 		
 		//update database or options if plugin version updated
 		if(get_option('MB_VERSION') != $MB_VERSION){
@@ -100,13 +133,7 @@ class MangoButtons{
 		//admin only includes
 		if( is_admin() ){
 			
-			/*If setup is not complete, render the setup page. Otherwise, render the settings page*/
-			if(false && !get_option('mb_setup_complete')){//TODO remove "FALSE"
-				include_once( MB_PLUGIN_PATH . 'admin/controllers/setup.php');
-			}
-			else{
-				include_once( MB_PLUGIN_PATH . 'admin/controllers/settings.php');
-			}
+			include_once( MB_PLUGIN_PATH . 'admin/controllers/settings.php');
 			
 			//Add tiny mce button filters (one for button and one for JS)
 			add_filter('mce_buttons', array( $this, 'add_mb_tiny_mce_button' ) );
@@ -118,6 +145,9 @@ class MangoButtons{
 			
 			//TODO check if edit post / edit page & only include if on one of those pages
 			add_action('admin_footer', array( $this, 'render_mb_modal') );
+			
+			//add global mb js variables in admin head action
+			add_action('admin_head', array( $this, 'create_global_mb_js_variables') );
 		}
 
 		add_action( 'wp_print_scripts',					array( $this, 'print_scripts'		) );
@@ -133,9 +163,6 @@ class MangoButtons{
 	
 	static function initializeMBOptions(){
 		
-		if(!get_option('mb_setup_complete')){
-			update_option('mb_setup_complete', false);
-		}
 		if(!get_option('mb_email')){
 			update_option('mb_email', '');
 		}
@@ -143,14 +170,20 @@ class MangoButtons{
 			update_option('mb_subscribed', false);
 		}
 		
+		//v1.1.0
+		if(!get_option('mb_icon_color')){
+			update_option('mb_icon_color', 'color');
+		}
+		
 	}
 	
 	static function destroyMBOptions(){
-		return;
+		
 		delete_option('MB_VERSION');
-		delete_option('mb_setup_complete');
 		delete_option('mb_email');
+		delete_option('mb_icon_color');
 		delete_option('mb_subscribed');
+		
 	}
 	
 	static function destroyMBDB(){
@@ -175,7 +208,7 @@ class MangoButtons{
 	
 	/*Delete all mb options, bars, and conversion data, and deactivate the plugin*/
 	static function deactivateAndDestroyMBData(){
-		return;
+		
 		global $MB_VERSION;
 		
 		mb()->destroyMBOptions();

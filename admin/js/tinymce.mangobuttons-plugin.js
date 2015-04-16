@@ -16,7 +16,7 @@
 						editor.addButton('mangobuttons', {
 							title: 'Add Mango Button',
 							cmd: 'mb_unsupported',
-							image: url + './../images/TinyMCEButton.png'
+							image: url + './../images/TinyMCEButton-' + MB_JS_GLOBALS.ICON_COLOR + '.png'
 						});
 						
 						editor.addCommand('mb_unsupported', function(){
@@ -106,7 +106,7 @@
 						title: 'Add Mango Button',
 						menu_button: true,
 						cmd: 'mb_command',
-						image: url + './../images/TinyMCEButton.png'
+						image: url + './../images/TinyMCEButton-' + MB_JS_GLOBALS.ICON_COLOR + '.png'
 					});
 					
 					editor.addCommand('mb_command', function(){
