@@ -3,7 +3,7 @@
 Plugin Name: Mango Buttons
 Plugin URI: https://mangobuttons.com
 Description: Mango Buttons is a button creator for WordPress that allows anyone to create beautiful buttons anywhere on their site.
-Version: 1.1.0
+Version: 1.2.0
 Author: Phil Baylog
 Author URI: https://mangobuttons.com
 License: GPLv2
@@ -16,7 +16,7 @@ define( 'MB_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'MB_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 global $MB_VERSION;
-$MB_VERSION = '1.1.0';
+$MB_VERSION = '1.2.0';
 
 class MangoButtons{
 
@@ -81,6 +81,21 @@ class MangoButtons{
 		return $mce_css;
 	}
 	
+	//https://vip.wordpress.com/documentation/register-additional-html-attributes-for-tinymce-and-wp-kses
+	//http://www.tinymce.com/wiki.php/Configuration:valid_children
+	function register_mb_anchor_element_children_for_tiny_mce($options){
+		if(!isset( $options['valid_children'] ) ) {
+			$options['valid_children'] = '';
+		}
+		else{
+			$options['valid_children'] .= ',';
+		}
+		
+		$options['valid_children'] .= '+a[span|b|em|strong|i|img]';
+		
+		return $options;
+	}
+	
 	function render_mb_modal(){
 		readfile(MB_PLUGIN_PATH . 'admin/views/mb-modal.html');
 	}
@@ -106,6 +121,12 @@ class MangoButtons{
 		}
 		
 	}
+	
+	
+	/*Utility function for determining whether WP is doing ajax call*/
+	function is_ajax_call(){
+		return defined('DOING_AJAX') && DOING_AJAX;
+	}
 
 	//called after the 'plugins_loaded action is fired
 	function include_after_plugin_loaded(){
@@ -113,7 +134,7 @@ class MangoButtons{
 		global $MB_VERSION;
 		
 		//If user is activating the plugin for the first time
-		if(!get_option('MB_VERSION')){
+		if(!get_option('MB_VERSION') && !mb()->is_ajax_call()){
 			$html = '';
 			
 			$html .= '<div class="updated" style="border-color:#F6871F;padding:5px;">';
@@ -139,6 +160,9 @@ class MangoButtons{
 			add_filter('mce_buttons', array( $this, 'add_mb_tiny_mce_button' ) );
 			add_filter('mce_external_plugins', array( $this, 'add_mb_tiny_mce_js' ) );
 			add_filter('mce_css', array( $this, 'add_mb_tiny_mce_css' ) );
+			
+			//add filter for preventing tinymce from stripping out valid child elements of a tags
+			add_filter('tiny_mce_before_init', array($this, 'register_mb_anchor_element_children_for_tiny_mce'), 14);
 
 			//include ajax handler for processing ajax calls made from admin pages
 			include_once( MB_PLUGIN_PATH . 'admin/ajax/mb-ajax-handler.php');

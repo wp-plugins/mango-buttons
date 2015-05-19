@@ -3,8 +3,8 @@ Contributors: philbaylog
 Tags: button generator, button creator, button maker, css button, css3 button, css3 button generator, button with icon, rounded button, button shortcode, gradient button, conversion button, call to action button
 Requires at least: 3.9
 Donate Link: https://mangobuttons.com/pricing
-Tested up to: 4.1.1
-Stable tag: 1.1.0
+Tested up to: 4.2.2
+Stable tag: 1.2.0
 License: GPLv2
 
 Mango Buttons is a button creator for WordPress that allows anyone to create beautiful buttons anywhere on their site.
@@ -74,6 +74,12 @@ By default, no information is sent to mangobuttons.com. You can opt in to receiv
 9. Fine-Tune button colors to either match your brand or stand in on your pages & posts
 
 == Changelog ==
+
+= 1.2.0 | May 18, 2015 =
+* Feature: Button Text now supports HTML - feel free to go crazy with custom text styling
+* Tweak: Pressing the return key while editing button text or url will insert the button into the editor
+* Tweak: Performance improvements to load time of page/post editing and Mango Buttons Editing Modal
+* Tweak: Added error checking for text & link fields checking when inserting button into page
 
 = 1.1.0 | Apr 16, 2015 =
 * Feature: The Mango Buttons icon in the visual editor can now be switched to a Grayscale icon

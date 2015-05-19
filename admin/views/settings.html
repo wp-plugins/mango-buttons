@@ -15,7 +15,7 @@
 		<div class="mb-header">
 			<div class="mb-page-icon"></div>
 			<h2 class="mb-header-text">
-				<span class="actionable">Mango Buttons Settings &nbsp;<span data-bind="with: notification()"><span class='mb-header-notification' data-bind="css: {'mb-success': status == 'success', 'mb-failure': status == 'failure'}"><i class="fa fa-check" data-bind="visible: status == 'success'"></i><i class="fa fa-exclamation-triangle" data-bind="visible: status == 'failure'"></i>&nbsp;<span data-bind="text: text"></span><i class="fa fa-times-circle" data-bind="click: $root.dismissNotification"></i></span></span></span>
+				<span>Mango Buttons Settings &nbsp;<span data-bind="with: notification()"><span class='mb-header-notification' data-bind="css: {'mb-success': status == 'success', 'mb-failure': status == 'failure'}"><i class="fa fa-check" data-bind="visible: status == 'success'"></i><i class="fa fa-exclamation-triangle" data-bind="visible: status == 'failure'"></i>&nbsp;<span data-bind="text: text"></span><i class="fa fa-times-circle" data-bind="click: $root.dismissNotification"></i></span></span></span>
 			</h2>
 		</div>
 		
@@ -24,9 +24,6 @@
 			<div class="mb-loading-page-placeholder" data-bind="visible: syncingDataWithServer()">
 				<i class="fa fa-spin fa-spinner" style="font-size:100px;text-align:center;width:100%;padding:100px 0;color:#DDD;"></i>
 			</div>
-			
-			<!--<h4>Well this is embarrassing...this plugin doesn't have any settings yet!</h4>-->
-			<!--<p>Have any ideas for things you would like to be able to customize? <a href="https://mangobuttons.com/support" target="_blank">Let me know here!</a></p>-->
 			
 			<div style="display:none;" class="mb-options-list" data-bind="visible: !syncingDataWithServer(), with: settings">
 				

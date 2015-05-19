@@ -71,7 +71,7 @@
 					<div class="mb-modal-option">
 						<div class="mb-option-icon"><i class="fa fa-font"></i></div>
 						<div class="mb-option-field">
-							<input type="text" placeholder="Button Text" data-bind="value: settings.text, valueUpdate: 'keyup'" />
+							<input type="text" placeholder="Button Text" data-bind="textInput: settings.text, returnKey: insertButton" />
 							<i class="mb-right-input-icon fa fa-plus-square-o tooltip" title="Add Icon" data-bind="click: function(){ addingIcon(true); }"></i>
 						</div>
 					</div>
@@ -79,7 +79,7 @@
 					<div class="mb-modal-option">
 						<div class="mb-option-icon"><i class="fa fa-link"></i></div>
 						<div class="mb-option-field">
-							<input type="text" placeholder="Button Link" data-bind="value: settings.link, valueUpdate: 'keyup'" />
+							<input type="text" placeholder="Button Link" data-bind="textInput: settings.link, returnKey: insertButton" />
 							<i class="mb-right-input-icon fa fa-share-square-o tooltip toggle" title="Opens in new tab?" data-bind="css: { selected: settings.new_tab() }, click: function(){ settings.new_tab(!settings.new_tab()); }"></i>
 							<!--<div class="mb-button-toggle"><i class="fa fa-square-o selected"></i> <span>/</span> <i class="fa fa-share-square-o tooltip"></i></div>-->
 						</div>
@@ -87,7 +87,7 @@
 				
 				</div>
 			
-				<div class="mb-modal-styles-selector" data-bind="visible: selectingStyle() && !gettingMoreStyles(), event: { 'mousewheel': function(){ if(!userHasScrolled()){ userHasScrolled(true); } return true; } }">
+				<div class="mb-modal-styles-selector" data-bind="visible: selectingStyle() && !gettingMoreStyles()">
 				    <!--<ul data-bind="foreach: ['flat', 'traditional', 'bordered', 'raised', 'metro', 'outline', 'cloud', 'app', 'subtle', 'glass', 'ocean', 'mango']">-->
 						<ul data-bind="foreach: ['flat', 'raised', 'bordered', 'glass', 'reversed', 'traditional']">
 							<li data-bind="click: $root.selectStyle, event: { mouseover: $root.setPreviewStyle, mouseout: $root.clearStylePreview }">
@@ -96,21 +96,15 @@
 				    </ul>
 				</div>
 				
-				<div class="mb-modal-icon-selector" data-bind="visible: addingIcon(), event: { 'mousewheel': function(){ if(!userHasScrolled()){ userHasScrolled(true); } return true; } }">
-					<ul data-bind="foreach: filteredIcons">
-						<li data-bind="click: $root.addIcon"><i class="fa" data-bind="attr: { 'class': 'fa fa-fw fa-' + $data }"></i><!--<span data-bind="text: $data"></span>--></li>
-					</ul>
-				</div>
+				<!-- Populate this dynamically using jQuery - too expensive to use KO to bind this -->
+				<div class="mb-modal-icon-selector" data-bind="visible: addingIcon()"></div>
 				
 				<div class="mb-modal-ad" data-bind="click: purchasePro, visible: selectingStyle() && gettingMoreStyles()"></div>
 			
 			</div><!--/.mb-modal-body-->
 		
 			<div class="mb-modal-actions" data-bind="visible: selectingStyle() && !gettingMoreStyles()">
-				<div class="cancel-action" data-bind="click: function(){ selectingStyle(false); }"><i class="fa fa-angle-left"></i> &nbsp;Back</div>
-				
-				<!--For pro-->
-				<!--<div class="info-text" data-bind="slowFadeVisible: !userHasScrolled()">Scroll down for more styles &nbsp;<i class="fa fa-long-arrow-down"></i></div>-->
+				<div class="cancel-action" data-bind="click: function(){ selectingStyle(false); }"><i class="fa fa-angle-left"></i> &nbsp;Back</div>				
 				
 				<!--For free-->
 				<div class="cancel-action" style="float:right;margin-right:0;" data-bind="click: function(){ gettingMoreStyles(true); }"><i class="fa fa-gift"></i> &nbsp;Get more styles</div>

@@ -11,6 +11,13 @@ jQuery(document).ready(function($){
 	MBModal = function(save_function) {
 		var self = this;
 		
+		//do this async of initializing MBModal object - otherwise every page load is delayed
+		self.koBindingsApplied = false;
+		self.applyBindings = function(){
+			ko.applyBindings(self, $('#mb-modal')[0]);
+			self.koBindingsApplied = true;
+		}
+		
 		self.saveFunction = save_function;
 		self.isVisible = ko.observable(false);
 		self.isUpdatingExistingButton = ko.observable(false);
@@ -18,15 +25,42 @@ jQuery(document).ready(function($){
 		
 		self.selectingStyle = ko.observable(false);
 		self.addingIcon = ko.observable(false);
-		self.userHasScrolled = ko.observable(false);
+		
 		self.viewingMoreOptions = ko.observable(false);
 		
 		self.gettingMoreStyles = ko.observable(false);
 		
 		self.faSearchText = ko.observable('');
+		self.faSearchText.subscribe(function(searchText){
+			
+			var iconListHtml = '<ul>';
+			
+			var filteredIcons = _.filter(self.faIcons, function(icon){
+				return icon.indexOf(searchText) > -1;
+			});
+
+			_.each(filteredIcons, function(icon){
+				iconListHtml += '<li data-icon="' + icon + '"><i class="fa fa-fw fa-' + icon + '"></i></li>';
+			});
+
+			iconListHtml += '</ul>';
+
+			$(".mb-modal-icon-selector").html(iconListHtml);
+
+			$(".mb-modal-icon-selector li").on('click', function(e){
+				var iconElem = $(this);
+				
+				self.addIcon(iconElem.attr('data-icon'));
+				
+				return false;
+			});
+		});
 		
 		self.addingIcon.subscribe(function(){
 			self.faSearchText('');
+			
+			//fire this so search results (icons) repopulate
+			self.faSearchText.valueHasMutated();
 			
 			setTimeout(function(){
 				$('#mb-icon-search-input').focus();
@@ -144,6 +178,11 @@ jQuery(document).ready(function($){
 		
 		self.show = function(settings){
 			
+			//if bindings not applied yet, apply bindings to modal
+			if(!self.koBindingsApplied){
+				self.applyBindings();
+			}
+			
 			if(settings){
 				self.isUpdatingExistingButton(true);
 				self.viewingMoreOptions(true);
@@ -242,6 +281,11 @@ jQuery(document).ready(function($){
 		}
 		
 		self.insertButton = function(){
+			
+			if(!self.settingsAreValid()){
+				return;
+			}
+			
 			self.saveFunction(ko.toJS(self.settings));
 			
 			self.hide();
@@ -363,14 +407,6 @@ jQuery(document).ready(function($){
 		'youtube', 'youtube-square', 'ambulance', 'h-square', 'hospital-o', 
 		'medkit', 'stethoscope', 'user-md'
 		];
-		
-		self.filteredIcons = ko.computed(function(){
-			return _.filter(self.faIcons, function(icon){
-				return icon.indexOf(self.faSearchText()) > -1;
-			});
-		});
-		
-		ko.applyBindings(self, $('#mb-modal')[0]);
 		
 		return self;
 	}

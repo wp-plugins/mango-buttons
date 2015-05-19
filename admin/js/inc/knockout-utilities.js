@@ -27,3 +27,27 @@ ko.bindingHandlers.slowFadeVisible = {
         ko.unwrap(value) ? jQuery(element).fadeIn(500) : jQuery(element).fadeOut(500);
     }
 };
+
+/*BINDING FOR ENTER AND RETURN AND ARROW KEYS*/
+ko.bindingHandlers.returnKey = {
+	init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
+		ko.utils.registerEventHandler(element, 'keydown', function(evt) {
+			if (evt.which === 13) {
+				evt.preventDefault();
+				valueAccessor().call(viewModel, evt);
+				return evt.preventDefault();
+			}
+		});
+	}
+};
+ko.bindingHandlers.escKey = {
+	init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
+		ko.utils.registerEventHandler(element, 'keydown', function(evt) {
+			if (evt.which === 27) {
+				evt.preventDefault();
+				valueAccessor().call(viewModel, evt);
+				return evt.preventDefault();
+			}
+		});
+	}
+};

@@ -128,6 +128,16 @@
 							
 							mb.show(settings);
 						}
+						else if(jQuery(btn).parents('.mb-button').length > 0){
+							//edit existing button (parent/grandparent/etc. of selected item)
+							editor.selection.select(jQuery(btn).parents('.mb-button')[0]);
+							
+							var button = jQuery(btn).parents('.mb-button').first();
+							
+							var settings = getSettingsFromButton(button);
+							
+							mb.show(settings);
+						}
 						else{
 							//creating new button
 							
@@ -137,14 +147,27 @@
 					});
 					
 					editor.on('dblClick', function(e){
-						if(jQuery(e.target).hasClass('mb-button')){
+						
+						var elem = e.target;
+						
+						if(jQuery(elem).hasClass('mb-button')){
 							
 							//select the entire element that was double clicked
-							editor.selection.select(e.toElement);
+							editor.selection.select(elem);
 							
-							var btn = jQuery(e.target);
+							var button = jQuery(elem);
 							
-							var settings = getSettingsFromButton(btn);
+							var settings = getSettingsFromButton(button);
+							
+							mb.show(settings);
+						}
+						else if(jQuery(elem).parents('.mb-button').length > 0){
+							//edit existing button (parent/grandparent/etc. of selected item)
+							editor.selection.select(jQuery(elem).parents('.mb-button')[0]);
+							
+							var button = jQuery(elem).parents('.mb-button').first();
+							
+							var settings = getSettingsFromButton(button);
 							
 							mb.show(settings);
 						}
