@@ -11,22 +11,28 @@ jQuery(document).ready(function($){
 		self.settings = {
 			email: ko.observable(),
 			subscribed: ko.observable(),
-			icon_color: ko.observable()
+			icon_color: ko.observable(),
+			extended_language_support: ko.observable()
 		}
 		self.settings.cache = {
 			email: ko.observable(),
-			icon_color: ko.observable()
+			icon_color: ko.observable(),
+			extended_language_support: ko.observable()
 		}
 		
 		self.settings.cacheCurrentSettings = function(){
 			
 			self.settings.cache.email(self.settings.email());
 			self.settings.cache.icon_color(self.settings.icon_color());
+			self.settings.cache.extended_language_support(self.settings.extended_language_support());
+			
 		}
 		
 		self.settings.dirty = ko.computed(function(){
 			
-			if(self.settings.icon_color() != self.settings.cache.icon_color()){
+			if(self.settings.icon_color() != self.settings.cache.icon_color() ||
+				self.settings.extended_language_support() != self.settings.cache.extended_language_support()
+			){
 				return true;
 			}
 			else{
@@ -91,6 +97,7 @@ jQuery(document).ready(function($){
 					settings: {
 						email: self.settings.email(),
 						icon_color: self.settings.icon_color(),
+						extended_language_support: self.settings.extended_language_support(),
 						subscribed: self.settings.subscribed()
 					}
 				},
@@ -158,6 +165,8 @@ jQuery(document).ready(function($){
 			
 			self.settings.email(mb_settings.email);
 			self.settings.icon_color(mb_settings.icon_color);
+			self.settings.extended_language_support(mb_settings.extended_language_support);
+			
 			self.settings.subscribed(mb_settings.subscribed && mb_settings.subscribed !== "false");
 			
 			

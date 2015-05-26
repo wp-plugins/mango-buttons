@@ -4,7 +4,7 @@ Tags: button generator, button creator, button maker, css button, css3 button, c
 Requires at least: 3.9
 Donate Link: https://mangobuttons.com/pricing
 Tested up to: 4.2.2
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 License: GPLv2
 
 Mango Buttons is a button creator for WordPress that allows anyone to create beautiful buttons anywhere on their site.
@@ -74,6 +74,9 @@ By default, no information is sent to mangobuttons.com. You can opt in to receiv
 9. Fine-Tune button colors to either match your brand or stand in on your pages & posts
 
 == Changelog ==
+
+= 1.2.1 | May 26, 2015 =
+* Tweak: Added extended language support for including languages supported by Google Font's latin-ext character set
 
 = 1.2.0 | May 18, 2015 =
 * Feature: Button Text now supports HTML - feel free to go crazy with custom text styling
