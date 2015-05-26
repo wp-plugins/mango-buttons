@@ -38,6 +38,17 @@
 					
 				</div>
 				
+				<div class="option-element">
+					<h6>Extended Language Support</h6>
+					<p>Enabling support for extended languages will include the latin-ext character set.</p>
+					
+					<ul>
+						<li data-bind="click: function(){ extended_language_support('disable'); }, css: { selected: extended_language_support() == 'disable' }">DISABLE</li>
+						<li data-bind="click: function(){ extended_language_support('enable'); }, css: { selected: extended_language_support() == 'enable' }">ENABLE</li>
+					</ul>
+					
+				</div>
+				
 			</div><!--/.mb-options-list-->
 			
 			<!--<a href="//fast.wistia.net/embed/iframe/bj9wbt88v4?popover=true" class="wistia-popover[height=341,playerColor=7b796a,width=640]"><i class="fa fa-youtube-play"></i> &nbsp;Visual Editor Introduction</a>-->

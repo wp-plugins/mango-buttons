@@ -38,6 +38,7 @@ class mb_settings{
 		update_option('mb_email', $settings['email']);
 		update_option('mb_subscribed', $settings['subscribed']);
 		update_option('mb_icon_color', $settings['icon_color']);
+		update_option('mb_extended_language_support', $settings['extended_language_support']);
 		
 		$result = true;
 		
@@ -75,6 +76,7 @@ class mb_settings{
 			'fname' => wp_get_current_user()->user_firstname,
 			'subscribed' => get_option('mb_subscribed'),
 			'icon_color' => get_option('mb_icon_color'),
+			'extended_language_support' => get_option('mb_extended_language_support'),
 			'website' => get_site_url()
 		) );
 		

@@ -3,7 +3,7 @@
 Plugin Name: Mango Buttons
 Plugin URI: https://mangobuttons.com
 Description: Mango Buttons is a button creator for WordPress that allows anyone to create beautiful buttons anywhere on their site.
-Version: 1.2.0
+Version: 1.2.1
 Author: Phil Baylog
 Author URI: https://mangobuttons.com
 License: GPLv2
@@ -16,7 +16,7 @@ define( 'MB_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'MB_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 global $MB_VERSION;
-$MB_VERSION = '1.2.0';
+$MB_VERSION = '1.2.1';
 
 class MangoButtons{
 
@@ -199,6 +199,11 @@ class MangoButtons{
 			update_option('mb_icon_color', 'color');
 		}
 		
+		//v1.2.1
+		if(!get_option('mb_extended_language_support')){
+			update_option('mb_extended_language_support', 'disable');
+		}
+		
 	}
 	
 	static function destroyMBOptions(){
@@ -207,6 +212,7 @@ class MangoButtons{
 		delete_option('mb_email');
 		delete_option('mb_icon_color');
 		delete_option('mb_subscribed');
+		delete_option('mb_extended_language_support');
 		
 	}
 	
@@ -297,7 +303,13 @@ class MangoButtons{
 		//required fonts for MB
 		wp_enqueue_style( 'fontawesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css', false, '4.3.0', 'all' );
 		
-		//Open Sans font already included in mb-button.css stylesheet (see next line)
+		//Include Open Sans font - with or without extended language support (depending on settings)
+		if(get_option('mb_extended_language_support') == 'enable'){
+			wp_enqueue_style( 'google-font-open-sans', '//fonts.googleapis.com/css?family=Open+Sans:400,300,700&subset=latin,latin-ext', false );
+		}
+		else{
+			wp_enqueue_style( 'google-font-open-sans', '//fonts.googleapis.com/css?family=Open+Sans:400,300,700', false );
+		}
 		
 		//public mb_button styles
 		wp_enqueue_style( 'mb', MB_PLUGIN_URL . 'public/style/mb-button.css', false, $MB_VERSION, 'all');
