@@ -3,7 +3,7 @@
 Plugin Name: Mango Buttons
 Plugin URI: https://mangobuttons.com
 Description: Mango Buttons is a button creator for WordPress that allows anyone to create beautiful buttons anywhere on their site.
-Version: 1.2.1
+Version: 1.2.2
 Author: Phil Baylog
 Author URI: https://mangobuttons.com
 License: GPLv2
@@ -16,7 +16,7 @@ define( 'MB_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'MB_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 global $MB_VERSION;
-$MB_VERSION = '1.2.1';
+$MB_VERSION = '1.2.2';
 
 class MangoButtons{
 
@@ -54,10 +54,17 @@ class MangoButtons{
 	}
 	
 	function add_settings_link_to_plugins_page($links){
-		$settings_link = '<a href="options-general.php?page=mb-admin">Settings</a>'; 
+		
+		$settings_url = admin_url('admin.php?page=mangobuttons');
+		$settings_link = '<a href="' . $settings_url . '">Settings</a>';
+		
 	  array_unshift($links, $settings_link);
 	
 	  return $links;
+	}
+	
+	function admin_menu(){
+		add_menu_page( 'Mango Buttons', 'Mango Buttons', 'manage_options', 'mangobuttons', 'mb', MB_PLUGIN_URL . 'admin/images/menu-icon.png', '43.4' );
 	}
 	
 	function add_mb_tiny_mce_button($buttons){
@@ -135,10 +142,13 @@ class MangoButtons{
 		
 		//If user is activating the plugin for the first time
 		if(!get_option('MB_VERSION') && !mb()->is_ajax_call()){
+			
+			$settings_url = admin_url('admin.php?page=mangobuttons');
+			
 			$html = '';
 			
 			$html .= '<div class="updated" style="border-color:#F6871F;padding:5px;">';
-			 $html .= '<p style="margin-left:10px;">Thanks for installing Mango Buttons! &nbsp;&nbsp;&nbsp;<a class="mb-bg" href="options-general.php?page=mb-admin" style="position:relative;background:#F6871F;color:#FFF;padding:3px 6px;cursor:pointer;border-radius:3px;letter-spacing:.05em;font-size:12px;font-weight:bold;">GET STARTED WITH MANGO BUTTONS &nbsp;<i class="fa fa-long-arrow-right"></i></a></p>';
+			 $html .= '<p style="margin-left:10px;">Thanks for installing Mango Buttons! &nbsp;&nbsp;&nbsp;<a class="mb-bg" href="' . $settings_url . '" style="position:relative;background:#F6871F;color:#FFF;padding:3px 6px;cursor:pointer;border-radius:3px;letter-spacing:.05em;font-size:12px;font-weight:bold;">GET STARTED WITH MANGO BUTTONS &nbsp;<i class="fa fa-long-arrow-right"></i></a></p>';
 			$html .= '</div><!--/.updated-->';
 			
 			echo $html;
@@ -154,7 +164,13 @@ class MangoButtons{
 		//admin only includes
 		if( is_admin() ){
 			
+			//add action for admin_menu
+			if( current_user_can('manage_options') ){
+				add_action('admin_menu', array($this, 'admin_menu'));
+			}
+			
 			include_once( MB_PLUGIN_PATH . 'admin/controllers/settings.php');
+			include_once( MB_PLUGIN_PATH . 'admin/controllers/help.php');
 			
 			//Add tiny mce button filters (one for button and one for JS)
 			add_filter('mce_buttons', array( $this, 'add_mb_tiny_mce_button' ) );

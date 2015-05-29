@@ -1,7 +1,7 @@
 jQuery(document).ready(function($){
 	
 	/*Set up any tooltips in the modal*/
-	$('.tooltip').tooltipster({
+	$('.mb-tooltip').tooltipster({
 		position: 'top',//top-right or top-left
 		theme: 'tooltipster-mb',
 		delay: 0,

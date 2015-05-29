@@ -16,12 +16,8 @@ class mb_settings{
 	}
 	
 	function admin_menu(){
-		$page = add_options_page(
-			'Settings Admin',
-			'Mango Buttons',
-			'manage_options', 'mb-admin',
-			array( $this, 'html' )
-    );
+		//note mangobuttons not mangobuttons-settings. This is the options page
+		$page = add_submenu_page('mangobuttons', 'Settings', 'Settings', 'manage_options', 'mangobuttons', array($this, 'html') );
 	}
 	
 	function subscribe_to_email_list($email_address){
@@ -35,10 +31,18 @@ class mb_settings{
 	/*Save the user's mango buttons settings from the settings page*/
 	static function save_settings($settings, $format = 'php'){
 		
-		update_option('mb_email', $settings['email']);
-		update_option('mb_subscribed', $settings['subscribed']);
-		update_option('mb_icon_color', $settings['icon_color']);
-		update_option('mb_extended_language_support', $settings['extended_language_support']);
+		if(isset($settings['email'])){
+			update_option('mb_email', $settings['email']);
+		}
+		if(isset($settings['subscribed'])){
+			update_option('mb_subscribed', $settings['subscribed']);
+		}
+		if(isset($settings['icon_color'])){
+			update_option('mb_icon_color', $settings['icon_color']);
+		}
+		if(isset($settings['extended_language_support'])){
+			update_option('mb_extended_language_support', $settings['extended_language_support']);
+		}
 		
 		$result = true;
 		

@@ -58,20 +58,6 @@
 				<span data-bind="visible: savingSettings()"><i class="fa fa-spin fa-spinner"></i> &nbsp;Saving...</span>
 			</button>
 			
-			<h4 style="clear:both;position:relative;float:left;margin:25px 0 0 0;padding-top:25px;width:100%;border-top:1px solid #DDD;">Quick How-To & Intro Videos</h4>
-			<ul id="intro-videos">
-				<li>
-					<h6>Visual Editor</h6>
-					<a href="//fast.wistia.net/embed/iframe/ag85a3it0f?popover=true" class="wistia-popover[height=341,playerColor=F6871F,width=640]"><img src="https://embed-ssl.wistia.com/deliveries/f92d6cf1e5d2a759c3ebf7e0efa76446e19b2ab5.jpg?image_play_button=true&image_play_button_color=F6871F&image_crop_resized=201x107" alt="" /></a>
-				</li>
-				<li>
-					<h6>In-Line Editing</h6>
-					<a href="//fast.wistia.net/embed/iframe/b5guclee84?popover=true" class="wistia-popover[height=341,playerColor=F6871F,width=640]"><img src="https://embed-ssl.wistia.com/deliveries/cd4e1530b750e9c0b56387de10923c9faaed09c5.jpg?image_play_button=true&image_play_button_color=F6871F&image_crop_resized=201x107" alt="" /></a>
-				</li>
-			</ul>
-			<!--JS for wistia popover embeds-->
-			<script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/popover-v1.js"></script>
-			
 			<div style="float:left;margin-top:150px;position:relative;width:100%;" class="option-element" data-bind="with: $root">
 				<span style="display:none;cursor:pointer;font-size:12px;border-bottom:1px dotted #AAA;color:#AAA;" data-bind="visible: !deletingPlugin(), click: function(){ deletingPlugin(true); }">Delete all plugin settings & data</span>
 				<div style="display:none;" class="dark-color" style="font-size:16px;padding:20px;position:relative;float:left;border-radius:3px;background:#EEE;border:1px solid #DDD;" data-bind="visible: deletingPlugin()">
