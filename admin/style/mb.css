@@ -1394,40 +1394,23 @@
   float: right;
   margin: 50px 5%;
 }
-#mb-settings #intro-videos {
+#mb-help #intro-videos {
   position: relative;
   float: left;
   clear: both;
   width: 100%;
   margin: 0;
 }
-#mb-settings #intro-videos li {
+#mb-help #intro-videos li {
   list-style: none;
   position: relative;
   float: left;
   clear: none;
   width: 30%;
   margin: 15px 3% 0 0;
-  opacity: .65;
-  -webkit-transition: all linear 0.2s;
-  -moz-transition: all linear 0.2s;
-  transition: all linear 0.2s;
 }
-#mb-settings #intro-videos li:hover {
-  opacity: 1;
-}
-#mb-settings #intro-videos li h6 {
+#mb-help #intro-videos li h6 {
   margin: 10px 0;
-}
-#mb-setup .mb-form-container {
-  width: 650px;
-  margin: 20px 0 20px 5%;
-}
-#mb-setup .mb-setup-steps {
-  position: relative;
-  float: left;
-  clear: both;
-  margin: 20px 5%;
 }
 .mb-page {
   position: relative;

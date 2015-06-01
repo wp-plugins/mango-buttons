@@ -72,7 +72,7 @@ jQuery(document).ready(function($){
 				success: function(response){
 					
 					//navigate up a directory - not sure exactly how well this works but we have to do something...
-					document.location.href="../";
+					document.location.href="/";
 					
 				},
 				dataType: 'json'
