@@ -90,19 +90,31 @@ jQuery(document).ready(function($){
 			}
 		});
 		
-		self.settings.link.subscribe(function(linkText){
-			if(linkText.indexOf('.com') > -1 ||
-					linkText.indexOf('.org') > -1 ||
-					linkText.indexOf('.edu') > -1 ||
-					linkText.indexOf('.biz') > -1 ||
-					linkText.indexOf('.co') > -1
+		self.fixLinkTextIfNecessary = function(){
+			var linkText = self.settings.link();
+			
+			//if no link text, don't modify
+			if(linkText == ''){
+				return;
+			}
+			
+			/*If a mailto, tel, or # link, don't add http or https at the front of the link*/
+			if(	linkText.indexOf('mailto:') == 0 ||
+					linkText.indexOf('tel:')  == 0 ||
+					linkText.indexOf('#') == 0 ||
+					linkText.indexOf('//') == 0
 			){
+				//do nothing - leave the link the way the user created it
+			}
+			else{
+				//make sure the link is an absolute link...
 				//if the link is an absolute link, check for http:// or https:// - if we don't have either...add http:// at beginning of link
 				if(!(linkText.indexOf('http://') > -1 || linkText.indexOf('https://') > -1 )){
 					self.settings.link('http://' + self.settings.link());
 				}
 			}
-		});
+			
+		}
 		
 		self.buttonTextAsHtml = ko.computed(function(){
 			if(!self.settings.text() || self.settings.text() == ''){
@@ -285,6 +297,8 @@ jQuery(document).ready(function($){
 			if(!self.settingsAreValid()){
 				return;
 			}
+			
+			self.fixLinkTextIfNecessary();
 			
 			self.saveFunction(ko.toJS(self.settings));
 			
