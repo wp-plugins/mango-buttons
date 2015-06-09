@@ -3,7 +3,7 @@
 Plugin Name: Mango Buttons
 Plugin URI: https://mangobuttons.com
 Description: Mango Buttons is a button creator for WordPress that allows anyone to create beautiful buttons anywhere on their site.
-Version: 1.2.3
+Version: 1.2.4
 Author: Phil Baylog
 Author URI: https://mangobuttons.com
 License: GPLv2
@@ -16,7 +16,7 @@ define( 'MB_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'MB_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 global $MB_VERSION;
-$MB_VERSION = '1.2.3';
+$MB_VERSION = '1.2.4';
 
 class MangoButtons{
 
