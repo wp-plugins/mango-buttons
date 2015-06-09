@@ -98,11 +98,12 @@ jQuery(document).ready(function($){
 				return;
 			}
 			
-			/*If a mailto, tel, or # link, don't add http or https at the front of the link*/
+			/*If a mailto, tel, relative, or # link, don't add http or https at the front of the link*/
 			if(	linkText.indexOf('mailto:') == 0 ||
 					linkText.indexOf('tel:')  == 0 ||
 					linkText.indexOf('#') == 0 ||
-					linkText.indexOf('//') == 0
+					linkText.indexOf('//') == 0 ||
+					linkText.indexOf('/') == 0
 			){
 				//do nothing - leave the link the way the user created it
 			}

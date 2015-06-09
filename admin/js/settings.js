@@ -144,7 +144,7 @@ jQuery(document).ready(function($){
 						self.saveSettings(function(){
 							$('.mb-subscribe').css('textAlign', 'center');
 							$('.mb-subscribe form').hide();
-							$('.mb-subscribe-text').text('Thanks for subscribing! Confirm your email to recieve your discount code.');
+							$('.mb-subscribe-text').text('Thanks for subscribing! Confirm your email to receive your discount code.');
 							self.subscribing(false);
 						});
 						
