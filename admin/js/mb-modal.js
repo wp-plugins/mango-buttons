@@ -246,9 +246,12 @@ jQuery(document).ready(function($){
 				submit: 0,
 				livePreview: false,
 				colorScheme: 'dark',
-				onBeforeShow: function(){
+				onBeforeShow: function(colorpicker){
 					//hide all currently visible colorpickers
 					$(".mb-color-picker-input").colpickHide();
+					
+					//add class to color picker so we can adjust styling of just our own color pickers
+					$(colorpicker).addClass('mb-color-picker');
 					
 					//make sure we have the most up to date color
 					$(this).colpickSetColor($(this).val(), true);

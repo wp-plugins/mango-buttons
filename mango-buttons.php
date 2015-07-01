@@ -3,7 +3,7 @@
 Plugin Name: Mango Buttons
 Plugin URI: https://mangobuttons.com
 Description: Mango Buttons is a button creator for WordPress that allows anyone to create beautiful buttons anywhere on their site.
-Version: 1.2.4
+Version: 1.2.7
 Author: Phil Baylog
 Author URI: https://mangobuttons.com
 License: GPLv2
@@ -16,7 +16,7 @@ define( 'MB_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'MB_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 global $MB_VERSION;
-$MB_VERSION = '1.2.4';
+$MB_VERSION = '1.2.7';
 
 class MangoButtons{
 
@@ -286,15 +286,13 @@ class MangoButtons{
 			wp_enqueue_script('knockout', MB_PLUGIN_URL . 'admin/js/inc/knockout-3.2.0.js', array('jquery'), '3.2.0', true);
 			wp_enqueue_script('knockout-mb-utilities', MB_PLUGIN_URL . 'admin/js/inc/knockout-utilities.js', array('jquery', 'knockout'), '3.2.0', true);
 			
-			//COL PICK
-			
-			
-			//MB dialog
-			wp_enqueue_script('mb-modal', MB_PLUGIN_URL . 'admin/js/mb-modal.js', array( 'jquery' ), $MB_VERSION, false);
-			wp_localize_script('mb-modal', 'ajaxurl', admin_url('admin-ajax.php') );
-			
+			//COLOR PICKER + TOOLTIPS
 			wp_enqueue_script('colpick', MB_PLUGIN_URL . 'admin/js/inc/colpick/js/colpick.js', array('jquery'), '0.0.0', true);
 			wp_enqueue_script('tooltipster', MB_PLUGIN_URL . 'admin/js/inc/tooltipster/jquery.tooltipster.min.js', array('jquery'), '0.0.0', true);
+			
+			//MB dialog
+			wp_enqueue_script('mb-modal', MB_PLUGIN_URL . 'admin/js/mb-modal.js', array( 'jquery', 'tooltipster', 'colpick' ), $MB_VERSION, false);
+			wp_localize_script('mb-modal', 'ajaxurl', admin_url('admin-ajax.php') );
 		}
 
 	}
