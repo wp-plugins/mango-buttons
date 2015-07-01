@@ -1384,8 +1384,8 @@
   padding: 3px 5px;
 }
 /*Color Pickers styles*/
-.colpick {
-  z-index: 100102;
+.mb-color-picker {
+  z-index: 100102 !important;
   /*because .mb-modal is 100100*/
 }
 #mb-settings #save-settings-button {
